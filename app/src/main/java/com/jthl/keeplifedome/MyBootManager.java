@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import com.jthl.keeplifedome.mode.MyLog;
 
@@ -26,8 +27,15 @@ public class MyBootManager extends BroadcastReceiver {
         String action = intent.getAction();
         this.packageManager = this.mContext.getPackageManager();
         if (action.equals(BOOT_COMPLETED)) {
-            StartApp();
-            context.startService(new Intent(context, AliveService.class));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // Android 8.0+ 必须使用 startForegroundService
+                StartApp();
+                context.startForegroundService(new Intent(context, AliveService.class));
+            } else {
+                StartApp();
+                context.startService(new Intent(context, AliveService.class));
+            }
+
         }
     }
 

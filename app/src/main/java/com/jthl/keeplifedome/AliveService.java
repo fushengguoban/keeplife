@@ -1,14 +1,20 @@
 package com.jthl.keeplifedome;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
 import androidx.core.os.EnvironmentCompat;
 
 import java.io.BufferedReader;
@@ -41,10 +47,30 @@ public class AliveService extends Service {
         shared2 = mContext.getSharedPreferences("alive_time", 0);
     }
 
+    @SuppressLint("ForegroundServiceType")
     @Override // android.app.Service
     public int onStartCommand(Intent intent, int i, int i2) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "alive_channel",
+                    "保活服务",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        // 创建前台服务通知
+        Notification notification = new NotificationCompat.Builder(this, "alive_channel")
+                .setContentTitle("保活服务运行中")
+                .setContentText("正在保持应用存活")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .build();
         String string = shared2.getString("aliveTime", "10");
         new Timer(true).schedule(new MyTimerTask(), 0L, 1000 * Long.parseLong(string));
+        // 启动前台服务（ID 必须 > 0）
+        startForeground(1, notification);
+
         return super.onStartCommand(intent, i, i2);
     }
 

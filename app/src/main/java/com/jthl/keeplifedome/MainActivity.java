@@ -104,6 +104,7 @@ public class MainActivity extends Activity {
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, android.app.Activity
     public void onStop() {
+        super.onStop();
         if (Build.VERSION.SDK_INT >= 23 && !Settings.canDrawOverlays(this)) {
             startActivity(new Intent("android.settings.action.MANAGE_OVERLAY_PERMISSION"));
             return;
@@ -116,7 +117,7 @@ public class MainActivity extends Activity {
         layoutParams.width = 1;
         layoutParams.height = 1;
         ((WindowManager) getApplicationContext().getSystemService("window")).addView(button, layoutParams);
-        super.onStop();
+
     }
 
     public void updateUI(List<AppInfo> list) {
