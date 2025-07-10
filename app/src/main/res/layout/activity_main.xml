@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/appinfo_text1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:background="#888899"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="application_info"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/appinfo_list1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:divider="#666666"
+        android:dividerHeight="1dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/app_null"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:text="cancle_app_keep_alive" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/alive_time"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="keep_alive_interval:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+<!--        android:entries="@array/times"-->
+
+        <Spinner
+            android:id="@+id/alive_spinner"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:overlapAnchor="false"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/appinfo_text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#888899"
+            android:gravity="start"
+            android:paddingStart="720dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="application_info"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/appinfo_list2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:divider="#666666"
+        android:dividerHeight="1dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/alive_null"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:text="cancle_keep_alive" />
+    </LinearLayout>
+</LinearLayout>
